@@ -6,9 +6,8 @@ SYNOPSIS
         # declare constants and push to @EXPORT
         use parent qw/Exporter/;
         our @EXPORT;
-        use Exporter::Constants;
 
-        declare_constant(
+        use Exporter::Constants (
             \@EXPORT => {
                 'TYPE_A' => 4649,
                 'TYPE_B' => 5963
