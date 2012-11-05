@@ -2,7 +2,7 @@ package Exporter::Constants;
 use strict;
 use warnings;
 use 5.010001;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Exporter;
 use parent qw/Exporter/;
@@ -11,8 +11,9 @@ sub import {
     my $class = shift;
     my $pkg = caller(0);
 
-    if (@_) {
-        _declare_constant($pkg, @_);
+    while (@_) {
+        my ($array, $stuff) = splice @_, 0, 2;
+        _declare_constant($pkg, $array, $stuff);
     }
 }
 
@@ -41,11 +42,16 @@ Exporter::Constants - Declare constants and export it.
     # declare constants and push to @EXPORT
     use parent qw/Exporter/;
     our @EXPORT;
+    our @EXPORT_OK;
 
     use Exporter::Constants (
         \@EXPORT => {
             'TYPE_A' => 4649,
             'TYPE_B' => 5963
+        },
+        \@EXPORT_OK => {
+            'TYPE_C' => 1919,
+            'TYPE_D' => 0721
         }
     );
 
